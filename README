@@ -1,0 +1,21 @@
+Usage Instructions:
+  # source rc
+  # vagrant up
+  # ansible-playbook -i hosts_test site.yml
+
+
+Tested with Vagrant 1.5.2 and Ansible 1.5.4 on OSX 10.9.3
+
+Structure of the Software
+
+/- Vagrantfile
+ - hosts_test (inventory file used under Vagrant testing environment)
+ - hosts_vagrant.yml (Vagrantfile uses this inventory)
+ - rc (source this file to load .ansible.cfg for testing;
+       | DON'T do this on production)
+ - .ansible.cfg (configuration for testing environment)
+ - site.yml (main playbook)
+
+   /roles...
+
+

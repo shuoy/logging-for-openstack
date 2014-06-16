@@ -1,0 +1,4 @@
+- hosts: elasticsearch
+  sudo: True
+  roles:
+    - { role: searchengine }

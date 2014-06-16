@@ -1,0 +1,13 @@
+# Vagrant hosts list during local testing
+---
+hosts:
+  shipper: 192.168.33.10
+  indexer: 192.168.33.11
+  elasticsearch: 192.168.33.12
+
+
+
+
+
+
+
