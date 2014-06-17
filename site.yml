@@ -1,4 +1,4 @@
-- hosts: elasticsearch
+- hosts: searchnodes
   sudo: True
   roles:
     - { role: searchengine }
