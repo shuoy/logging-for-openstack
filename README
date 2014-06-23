@@ -1,14 +1,16 @@
 Usage Instructions:
-  # source rc
-  # vagrant up
-  # ansible-playbook -i hosts_test site.yml
+  # ./run.sh
+
+
 
 
 Tested with Vagrant 1.5.2 and Ansible 1.5.4 on OSX 10.9.3
 
 Structure of the Software
 
-/- Vagrantfile
+/- Vagrantfile.debian (Vagratn file for Ubuntu)
+ - Vagrantfile.redhat (Vagrant file for CentOS)
+ - run.sh (run this script with 'debian' or 'redhat' for testing)
  - hosts_test (inventory file used under Vagrant testing environment)
  - hosts_vagrant.yml (Vagrantfile uses this inventory)
  - rc (source this file to load .ansible.cfg for testing;
