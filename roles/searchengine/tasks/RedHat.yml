@@ -1,10 +1,9 @@
 ---
 - name: Ensure python-pycurl is installed
   yum: pkg=python-pycurl state=installed
-    - openjdk-7-jre
 
 - name: Ensure Elasticsearch signing key is installed
-  rpm_key: url={{url_es_gpg_key}} state=present
+  rpm_key: key={{url_es_gpg_key}} state=present
 
 - name: Ensure the repo file for ElasticSearch is ready at the destination machines
   copy: src=elasticsearch_yum.repo
@@ -12,7 +11,7 @@
         owner=root group=root mode=0644
 
 - name: Ensure openjdk is installed
-  yum:  pkg=openjdk-7-jre state=installed
+  yum:  pkg=java-1.7.0-openjdk state=installed
 
 - name: Ensure ElasticSearch is installed
   yum: pkg=elasticsearch state=installed

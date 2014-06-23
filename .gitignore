@@ -1,2 +1,4 @@
 ansible.log
+Vagrantfile
+*.swp
 .vagrant/
