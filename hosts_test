@@ -1,2 +1,8 @@
+[logstashnodes]
+logstash.example.org ansible_ssh_host=192.168.33.11 ansible_ssh_user=vagrant
+
 [searchnodes]
 elasticsearch.example.org ansible_ssh_host=192.168.33.12 ansible_ssh_user=vagrant
+
+[kibananodes]
+kibana.example.org ansible_ssh_host=192.168.33.13 ansible_ssh_user=vagrant
