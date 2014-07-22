@@ -7,6 +7,7 @@
   sudo: True
   roles:
     - { role: searchengine }
+    - { role: kibana}
 
 - hosts: kibananodes
   sudo: True

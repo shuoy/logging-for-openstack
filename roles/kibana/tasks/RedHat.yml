@@ -1,0 +1,47 @@
+- name: Install Apache
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - apache2
+    - python-passlib
+
+- name: Disable default vhost
+  command: /usr/sbin/a2dissite default
+  notify:
+    - reload apache
+
+- name: Create vhost directory
+  file: path={{ kibana_doc_root }} owner=www-data group=www-data mode=0755 state=directory
+
+- name: Create apache vhost config from template
+  template: src=vhost.j2 dest=/etc/apache2/sites-available/kibana owner=root group=root mode=0644
+
+- name: Fetch Kibana source
+  get_url: url={{ kibana_url }}{{ kibana_version }}.tar.gz dest=/tmp/{{ kibana_version }}.tar.gz
+
+- name: Unarchive source to vhost
+  command: tar -C {{ kibana_doc_root }} -zxf /tmp/{{ kibana_version }}.tar.gz
+
+- name: debug variables
+  debug: msg=" variable concatication = {{ kibana_doc_root }}/{{ kibana_version }}/{{kibana_config_file}}"
+
+- name: Replace the URI of the ElasticSearch service in config.js on Kibana server
+  lineinfile:
+    dest=/var/www/kibana/kibana-3.0.0milestone4/config.js
+    regexp="(elasticsearch.* \"http.*)$"
+    state=present
+    line="elasticsearch':' \" {{ elasticsearch_URL }}:{{ elasticsearch_port }} \" "
+#    dest="{{ kibana_doc_root }}/{{ kibana_version }}/{{kibana_config_file}}"
+
+- name: Set Permissions
+  command: /bin/chown -R www-data.www-data {{ kibana_doc_root }}/{{ kibana_version }}
+
+- name: Create htaccess
+  template: src=htaccess.j2 dest={{ kibana_doc_root }}/{{ kibana_version }}/.htaccess owner=www-data group=www-data mode=0644
+
+- name: Create htpasswd user
+  htpasswd: path=/etc/apache2/kibana-htpasswd name="{{ kibana_user }}" password="{{ kibana_pass }}" owner=root group=www-data mode=0640
+
+- name: Activate vhost and reload apache
+  command: a2ensite kibana
+  notify:
+   - reload apache

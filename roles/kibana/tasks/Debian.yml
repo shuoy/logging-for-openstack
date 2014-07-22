@@ -22,14 +22,16 @@
   command: tar -C {{ kibana_doc_root }} -zxf /tmp/{{ kibana_version }}.tar.gz
 
 - name: debug variables
-  debug: msg=" variable concatication = {{ kibana_doc_root }}/{{ kibana_version }}/{{kibana_config_file}}"
+  debug: msg=" variable concatication = {{ kibana_doc_root }}/{{ kibana_version }}/{{ kibana_config_file }}"
 
 - name: Replace the URI of the ElasticSearch service in config.js on Kibana server
-  lineinfile:
-    dest={{ kibana_doc_root }}/{{ kibana_version }}/{{kibana_config_file}}
-    regexp="(elasticsearch.* \"http.*)$"
+  lineinfile: >
+    dest={{ kibana_doc_root }}/{{ kibana_version }}/{{ kibana_config_file }}
+    regexp='(elasticsearch.* \"http.*)$'
     state=present
-    line="elasticsearch':' \" {{ elasticsearch_URL }}:{{ elasticsearch_port }} \" "
+    line='elasticsearch: " {{ elasticsearch_URL }}:{{ elasticsearch_port }} ", '
+#    dest="{{ kibana_doc_root }}/{{ kibana_version }}/{{kibana_config_file}}"
+#    "dest=/var/www/kibana/kibana-3.0.0milestone4/config.js
 
 - name: Set Permissions
   command: /bin/chown -R www-data.www-data {{ kibana_doc_root }}/{{ kibana_version }}
