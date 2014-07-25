@@ -1,3 +1,13 @@
+- hosts: shippernodes
+  sudo: True
+  roles:
+    - { role: shipper }
+
+- hosts: redisnodes
+  sudo: True
+  roles:
+    - { role: redis }
+
 - hosts: logstashnodes
   sudo: True
   roles:
@@ -7,7 +17,6 @@
   sudo: True
   roles:
     - { role: searchengine }
-    - { role: kibana}
 
 - hosts: kibananodes
   sudo: True

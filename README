@@ -1,3 +1,13 @@
+Software Requiement:
+	ansible vagrant (suppose virtualbox and ruby are installed)
+	- Debian
+	- CentOS
+	- Mac OSX
+		ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)" & brew install ansible  (easy_install ansible or pip install ansible)
+		brew tap phinze/homebrew-cask
+		brew install brew-cask
+		brew cask install vagrant
+
 Usage Instructions:
   # ./run.sh [Debian | Redhat]
 

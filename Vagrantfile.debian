@@ -8,13 +8,13 @@ hosts = hosts_file['hosts']
 Vagrant.configure("2") do |config|
   hosts.each do |name, ip|
     config.vm.define name do |machine|
-      machine.vm.box = "precise64"
-      machine.vm.box_url = "http://files.vagrantup.com/precise64.box"
+      machine.vm.box = "ubuntu/precise64"
+      machine.vm.box_url = "https://vagrantcloud.com/ubuntu/precise64/version/1/provider/virtualbox.box"
       machine.vm.hostname = "%s.example.org" % name
       machine.vm.network :private_network, ip: ip
       machine.vm.provider "virtualbox" do |v|
           v.name = name
-          v.customize ["modifyvm", :id, "--memory", 200]
+          v.customize ["modifyvm", :id, "--memory", 512]
       end
     end
   end

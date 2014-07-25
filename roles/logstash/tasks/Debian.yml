@@ -1,33 +1,39 @@
 ---
 
-- name: Ensure python-pycurl is installed
-  apt: pkg=python-pycurl state=installed
+#- name: Ensure python-pycurl is installed
+#  apt: pkg=python-pycurl state=installed
 
-- name: Ensure Elasticsearch apt signing key is installed
+- name: Ensure elasticsearch apt signing key is installed
   apt_key: url={{url_gpg_key}} state=present
 
-- name: Ensure Logstash repository is installed
+- name: Ensure logstash repository is installed
   apt_repository: repo="deb {{url_logstash_pkg}} stable main" update_cache=yes
 
-- name: Ensure logstash is installed
+- name: Ensure java and logstash are installed
   apt: pkg={{item}} state=installed
   with_items:
     - openjdk-7-jre
     - logstash
 
-- name: Ensure logstash service config is in place
-  copy: src=logstash_default
-        dest=/etc/default/logstash
+# - name: Ensure logstash service is run as the root user
+#  copy: src=logstash
+#        dest=/etc/init.d/logstash
+#        owner=root group=root mode=0755
+#  notify:
+#    - restart logstash
+
+- name: Ensure logstash config is in place
+  copy: src=central.conf
+        dest=/etc/logstash/conf.d/central.conf
         owner=root group=root mode=0644
   notify:
     - restart logstash
 
-- name: Ensure logstash config is in place
-  copy: src=logstash.conf
-        dest=/etc/logstash/conf.d/logstash.conf
-        owner=root group=root mode=0644
+- name: Ensure logstash boots on startup
+  shell: update-rc.d logstash defaults
   notify:
     - restart logstash
+
 
 #- name: Ensure SSL certificates have the correct directories
 #  file: path=/etc/pki/tls/{{item}} owner=root group=root mode=0755 state=directory
@@ -46,8 +52,3 @@
 #  copy: src=certs/logstash-forwarder.key dest=/etc/pki/tls/private/logstash-forwarder.key owner=root group=root mode=0755
 #  notify:
 #    - restart logstash
-
-- name: Ensure logstash boots on startup
-  shell: update-rc.d logstash defaults
-  notify:
-    - restart logstash
