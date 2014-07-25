@@ -2,6 +2,3 @@
 
 - name: restart logstash
   service: name=logstash state=restarted
-
-- name: restart redis
-  service: name=redis-server state=restarted

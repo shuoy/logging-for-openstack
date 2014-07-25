@@ -15,12 +15,27 @@
     - openjdk-7-jre
     - logstash
 
-# - name: Ensure logstash service is run as the root user
-#  copy: src=logstash
-#        dest=/etc/init.d/logstash
-#        owner=root group=root mode=0755
-#  notify:
-#    - restart logstash
+- name: Ensure redis is installed
+  apt: pkg=redis-server state=installed
+
+- name: Ensure redis service config is in place
+  copy: src=redis.conf
+        dest=/etc/redis/redis.conf
+        owner=root group=root mode=0644
+  notify:
+    - restart redis
+
+- name: Ensure redis boots on startup
+  shell: update-rc.d redis-server defaults
+  notify:
+    - restart redis
+
+ - name: Ensure logstash service is run as the root user
+  copy: src=logstash
+        dest=/etc/init.d/logstash
+        owner=root group=root mode=0755
+  notify:
+    - restart logstash
 
 - name: Ensure logstash config is in place
   copy: src=central.conf
