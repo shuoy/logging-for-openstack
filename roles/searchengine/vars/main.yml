@@ -1,7 +1,0 @@
----
-
-# variables to define elasticsearch installations
-url_es_gpg_key: http://packages.elasticsearch.org/GPG-KEY-elasticsearch
-
-# Elasticsearch repository (1.2.x)
-url_elasticsearch_pkg: http://packages.elasticsearch.org/elasticsearch/1.2/debian

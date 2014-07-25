@@ -1,7 +1,12 @@
----
 
 - name: restart logstash
   service: name=logstash state=restarted
 
-- name: restart redis
+- name: restart redis-server
   service: name=redis-server state=restarted
+
+- name: restart elasticsearch
+  service: name=elasticsearch state=restarted
+
+- name: restart apache2
+  service: name=apache2 state=restarted

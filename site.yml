@@ -3,22 +3,7 @@
   roles:
     - { role: shipper }
 
-- hosts: redisnodes
-  sudo: True
-  roles:
-    - { role: redis }
-
 - hosts: logstashnodes
   sudo: True
   roles:
     - { role: logstash }
-
-- hosts: searchnodes
-  sudo: True
-  roles:
-    - { role: searchengine }
-
-- hosts: kibananodes
-  sudo: True
-  roles:
-    - { role: kibana }

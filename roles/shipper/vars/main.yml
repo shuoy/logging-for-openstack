@@ -1,4 +1,4 @@
----
+
 # variables to define logstash installations
 url_gpg_key: http://packages.elasticsearch.org/GPG-KEY-elasticsearch
 

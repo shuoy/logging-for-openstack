@@ -1,11 +1,7 @@
 # Vagrant hosts list during local testing
----
 
 hosts:
   shipper1: 192.168.33.10
   shipper2: 192.168.33.11
 
-#  redis: 192.168.33.20
-  logstash: 192.168.33.21
-  elasticsearch: 192.168.33.22
-  kibana: 192.168.33.23
+  logstash: 192.168.33.20

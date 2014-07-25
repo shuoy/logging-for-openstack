@@ -1,6 +1,22 @@
----
 # variables to define logstash installations
 url_gpg_key: http://packages.elasticsearch.org/GPG-KEY-elasticsearch
 
 # Logstash debian repository (1.4.x)
 url_logstash_pkg: http://packages.elasticsearch.org/logstash/1.4/debian
+
+# Elasticsearch repository (1.2.x)
+url_elasticsearch_pkg: http://packages.elasticsearch.org/elasticsearch/1.2/debian
+
+# Installation related variable
+kibana_doc_root: "/var/www/kibana"
+kibana_url: "https://download.elasticsearch.org/kibana/kibana/"
+kibana_version: "kibana-3.1.0"
+kibana_config_file: "config.js"
+
+elasticsearch_URL: "http://192.168.33.20"
+elasticsearch_port: "9200"
+
+# User / password to access the kibana interface (ToBeOverrided)
+kibana_user: "admin"
+kibana_pass: "CHANGE ME!"
+kibana_admin_email: "root@localhost"
