@@ -1,7 +1,10 @@
 ---
 
+- name: Ensure libselinux-python is installed
+  yum: pkg=libselinux-python state=installed
+
 - name: Ensure elasticsearch apt signing key is installed
-  rpm_key: url={{ url_gpg_key }} state=present
+  rpm_key: key={{ url_gpg_key }} state=present
 
 - name: Ensure logstash repository is installed
   copy: src=Logstash-yum.repo
@@ -37,6 +40,6 @@
   shell: ls -l /var/log/ > /var/log/permission.txt
 
 - name: Change log files permission
-  shell: chmod 644 /var/log/*
+  shell: chmod 644 /var/log/messages /var/log/secure /var/log/boot.log
   notify:
     - restart logstash

@@ -3,6 +3,9 @@
 #- name: Ensure python-pycurl is installed
 #  yum: pkg=python-pycurl state=installed
 
+- name: Ensure libselinux-python is installed
+  yum: pkg=libselinux-python state=installed
+
 - name: Ensure epel is installed
   yum: name=http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm state=installed
 
