@@ -1,24 +1,72 @@
 ---
-- name: Ensure python-pycurl is installed
-  yum: pkg=python-pycurl state=installed
 
-- name: Ensure Elasticsearch signing key is installed
+#- name: Ensure python-pycurl is installed
+#  yum: pkg=python-pycurl state=installed
+
+- name: Ensure epel is installed
+  yum: name=http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm state=installed
+
+- name: Ensure epel signing key is installed
+  rpm_key: key=/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
+
+- name: Ensure elasticsearch signing key is installed
   rpm_key: key={{url_gpg_key}} state=present
 
-- name: Ensure the repo file for ElasticSearch is ready at the destination machines
-  copy: src=Elasticsearch-yum.repo
+- name: Ensure the repo file for logstash and elasticSearch are ready at the destination machines
+  copy: src={{ item }}
         dest=/etc/yum.repos.d/
         owner=root group=root mode=0644
+  with_items:
+    - Logstash-yum.repo
+    - Elasticsearch-yum.repo
 
-- name: Ensure the repo file for ElasticSearch is ready at the destination machines
-  copy: src=Logstash-yum.repo
-        dest=/etc/yum.repos.d/
+- name: Ensure openjdk, logstash, redis, elasticsearch and httpd are installed
+  yum:  pkg={{ item }} state=installed
+  with_items:
+    - java-1.7.0-openjdk
+    - logstash
+    - redis
+    - elasticsearch
+    - httpd
+
+- name: Ensure config files for logstash and elasticsearch are in place
+  copy: src={{ item.src }}
+        dest={{ item.dst }}
         owner=root group=root mode=0644
+  notify:
+    - restart logstash
+    - restart redis
+    - restart elasticsearch
+  with_items:
+    - {name: 'logstash', src: 'central.conf', dst: '/etc/logstash/conf.d/central.conf'}
+    - {name: 'redis', src: 'redis.conf', dst: '/etc/redis.conf'}
+    - {name: 'elasticsearch', src: 'elasticsearch.yml', dst: '/etc/elasticsearch/elasticsearch.yml'}
 
+- name: Ensure logstash, redis-server, elasticsearch and httpd boots on startup
+  command: chkconfig {{ item }} on
+  notify:
+    - restart logstash
+    - restart redis
+    - restart elasticsearch
+    - restart httpd
+  with_items: 
+    - logstash
+    - redis
+    - elasticsearch
+    - httpd
 
-- name: Ensure openjdk is installed
-  yum:  pkg=java-1.7.0-openjdk state=installed
+- name: Fetch kibana source
+  get_url: url={{ kibana_url }}{{ kibana_version }}.tar.gz dest=/tmp/{{ kibana_version }}.tar.gz
 
-- name: Ensure ElasticSearch is installed
-  yum: pkg=elasticsearch state=installed
+- name: Unarchive source to vhost
+  command: tar -C /var/www/html/ -zxf /tmp/{{ kibana_version }}.tar.gz
 
+- name: Replace the URI of the elasticSearch service in config.js on Kibana server
+  lineinfile: >
+    dest='/var/www/html/kibana-3.1.0/config.js'
+    regexp='(elasticsearch.* \"http.*)$'
+    state=present
+    line='elasticsearch: "{{ elasticsearch_URL }}:{{ elasticsearch_port }}",'
+
+- name: debug variables
+  debug: msg="variable concatication = {{ kibana_doc_root }}/{{ kibana_version }}/{{ kibana_config_file }}"

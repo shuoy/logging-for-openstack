@@ -1,0 +1,42 @@
+---
+
+- name: Ensure elasticsearch apt signing key is installed
+  rpm_key: url={{ url_gpg_key }} state=present
+
+- name: Ensure logstash repository is installed
+  copy: src=Logstash-yum.repo
+        dest=/etc/yum.repos.d/
+        owner=root group=root mode=0644
+
+- name: Ensure java and logstash are installed
+  yum: pkg={{ item }} state=installed
+  with_items:
+    - java-1.7.0-openjdk
+    - logstash
+
+#- name: Ensure logstash service is run as the root user
+#  copy: src=logstash
+#        dest=/etc/init.d/logstash
+#        owner=root group=root mode=0755
+#  notify:
+#    - restart logstash
+
+- name: Ensure logstash config is in place
+  copy: src=shipper-redhat.conf
+        dest=/etc/logstash/conf.d/shipper.conf
+        owner=root group=root mode=0644
+  notify:
+    - restart logstash
+
+- name: Ensure logstash boots on startup
+  command: chkconfig logstash on
+  notify:
+    - restart logstash
+
+- name: backup logfiles permission
+  shell: ls -l /var/log/ > /var/log/permission.txt
+
+- name: Change log files permission
+  shell: chmod 644 /var/log/*
+  notify:
+    - restart logstash

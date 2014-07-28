@@ -1,3 +1,4 @@
+---
 
 - name: Ensure elasticsearch apt signing key is installed
   apt_key: url={{ url_gpg_key }} state=present
@@ -19,18 +20,21 @@
 #    - restart logstash
 
 - name: Ensure logstash config is in place
-  copy: src=shipper.conf
+  copy: src=shipper-debian.conf
         dest=/etc/logstash/conf.d/shipper.conf
         owner=root group=root mode=0644
   notify:
     - restart logstash
 
 - name: Ensure logstash boots on startup
-  shell: update-rc.d logstash defaults
+  command: update-rc.d logstash defaults
   notify:
     - restart logstash
 
-- name: Change log file permission
-  raw: chmod 644 /var/log/auth.log  /var/log/kern.log  /var/log/syslog
+- name: backup logfiles permission
+  shell: ls -l /var/log/ > /var/log/permission.txt
+
+- name: Change log files permission
+  shell: chmod 644 /var/log/*
   notify:
     - restart logstash

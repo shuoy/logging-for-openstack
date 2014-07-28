@@ -1,3 +1,5 @@
+---
+
 - hosts: shippernodes
   sudo: True
   roles:
