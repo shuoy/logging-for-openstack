@@ -1,0 +1,21 @@
+# {{ ansible_managed }}
+<VirtualHost *:80>
+	ServerAdmin {{ kibana_admin_email }}
+
+	DocumentRoot {{ kibana_doc_root }}/{{ kibana_version }}
+	<Directory {{ kibana_doc_root }}/{{ kibana_version }}>
+		Options -Indexes -FollowSymLinks -MultiViews
+		AllowOverride All
+		Order allow,deny
+		allow from all
+	</Directory>
+
+	ErrorLog /var/log/apache2/kibana.error.log
+
+	# Possible values include: debug, info, notice, warn, error, crit,
+	# alert, emerg.
+	LogLevel warn
+
+	CustomLog /var/log/apache2/kibana.access.log combined
+</VirtualHost>
+# {{ ansible_managed }}
