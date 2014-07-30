@@ -1,0 +1,14 @@
+[logstashnodes]
+n154 ansible_ssh_host=10.1.0.154 ansible_ssh_user=caorc
+
+[shippernodes]
+n154 ansible_ssh_host=10.1.0.106 ansible_ssh_user=caorc
+n154 ansible_ssh_host=10.1.0.107 ansible_ssh_user=caorc
+n154 ansible_ssh_host=10.1.0.108 ansible_ssh_user=caorc
+n154 ansible_ssh_host=10.1.0.109 ansible_ssh_user=caorc
+n154 ansible_ssh_host=10.1.0.110 ansible_ssh_user=caorc
+n154 ansible_ssh_host=10.1.0.111 ansible_ssh_user=caorc
+n154 ansible_ssh_host=10.1.0.112 ansible_ssh_user=caorc
+n154 ansible_ssh_host=10.1.0.113 ansible_ssh_user=caorc
+n154 ansible_ssh_host=10.1.0.114 ansible_ssh_user=caorc
+n154 ansible_ssh_host=10.1.2.115 ansible_ssh_user=caorc

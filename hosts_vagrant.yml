@@ -1,9 +1,0 @@
----
-
-# Vagrant hosts list during local testing
-
-hosts:
-  shipper1: 192.168.33.10
-  shipper2: 192.168.33.11
-
-  logstash: 192.168.33.20
