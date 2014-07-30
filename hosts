@@ -1,14 +1,7 @@
 [logstashnodes]
-n154 ansible_ssh_host=10.1.0.154 ansible_ssh_user=caorc
+centos6.5-create0 ansible_ssh_host=192.168.123.158 ansible_ssh_user=root
 
 [shippernodes]
-n154 ansible_ssh_host=10.1.0.106 ansible_ssh_user=caorc
-n154 ansible_ssh_host=10.1.0.107 ansible_ssh_user=caorc
-n154 ansible_ssh_host=10.1.0.108 ansible_ssh_user=caorc
-n154 ansible_ssh_host=10.1.0.109 ansible_ssh_user=caorc
-n154 ansible_ssh_host=10.1.0.110 ansible_ssh_user=caorc
-n154 ansible_ssh_host=10.1.0.111 ansible_ssh_user=caorc
-n154 ansible_ssh_host=10.1.0.112 ansible_ssh_user=caorc
-n154 ansible_ssh_host=10.1.0.113 ansible_ssh_user=caorc
-n154 ansible_ssh_host=10.1.0.114 ansible_ssh_user=caorc
-n154 ansible_ssh_host=10.1.2.115 ansible_ssh_user=caorc
+centos6.5-create1 ansible_ssh_host=192.168.123.159 ansible_ssh_user=root
+centos6.5-create2 ansible_ssh_host=192.168.123.160 ansible_ssh_user=root
+centos6.5-create3 ansible_ssh_host=192.168.123.161 ansible_ssh_user=root

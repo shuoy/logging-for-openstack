@@ -40,6 +40,6 @@
   shell: ls -l /var/log/ > /var/log/permission.txt
 
 - name: Change log files permission
-  shell: chmod 644 /var/log/messages /var/log/secure /var/log/boot.log
+  shell: chmod 644 /var/log/messages /var/log/secure
   notify:
     - restart logstash

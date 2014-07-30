@@ -1,8 +1,5 @@
 ---
 
-#- name: Ensure python-pycurl is installed
-#  yum: pkg=python-pycurl state=installed
-
 - name: Ensure libselinux-python is installed
   yum: pkg=libselinux-python state=installed
 
