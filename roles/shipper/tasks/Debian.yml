@@ -31,8 +31,8 @@
   notify:
     - restart logstash
 
-- name: backup logfiles permission
-  shell: ls -l /var/log/ > /var/log/permission.txt
+#- name: backup logfiles permission
+#  shell: ls -l /var/log/ > /var/log/permission.txt
 
 - name: Change log files permission
   shell: chmod 644 /var/log/syslog /var/log/kern.log /var/log/auth.log /var/log/boot.log

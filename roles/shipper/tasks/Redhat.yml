@@ -36,10 +36,10 @@
   notify:
     - restart logstash
 
-- name: backup logfiles permission
-  shell: ls -l /var/log/ > /var/log/permission.txt
+#- name: backup logfiles permission
+#  shell: ls -l /var/log/ > /var/log/permission.txt
 
 - name: Change log files permission
-  shell: chmod 644 /var/log/messages /var/log/secure
+  shell: chmod 644 /var/log/ceph.log
   notify:
     - restart logstash
