@@ -8,12 +8,12 @@ if { $argc != 3 } {
 	exit 1
 }
 
-set username [lindex $argv 0]
+set user [lindex $argv 0]
 set ip [lindex $argv 1]
 set passwd [lindex $argv 2]
 set sendpasswd 0
 
-spawn ssh-copy-id $username@$ip
+spawn ssh-copy-id $user@$ip
 
 while 1 {
 	expect {
@@ -25,11 +25,11 @@ while 1 {
 			set sendpasswd 1
 		}
 		"exist" {
-			send_user "\[INFO\]The key already exists on remote system, try to login with \"ssh $username@$ip\"\n"
+			send_user "\[INFO\]The key already exists on remote system, try to login with \"ssh $user@$ip\"\n"
 			exit
 		}
 		"Number of key(s) added" {
-			send_user "\[INFO\]The key is installed successfully! Try to login with \"ssh $username@$ip\"\n"
+			send_user "\[INFO\]The key is installed successfully! Try to login with \"ssh $user@$ip\"\n"
 			exit
 		}
 		"Host is down" {

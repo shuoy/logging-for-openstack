@@ -2,6 +2,7 @@
 
 - name: Ensure elasticsearch apt signing key is installed
   apt_key: url={{ url_gpg_key }} state=present
+  # may need manully installed by "rpm --import http://packages.elasticsearch.org/GPG-KEY-elasticsearch"
 
 - name: Ensure logstash and elasticsearch repository is installed
   apt_repository: repo="deb {{ item }} stable main" update_cache=yes
@@ -63,8 +64,8 @@
 - name: Unarchive source to vhost
   command: tar -C {{ kibana_doc_root }} -zxf /tmp/{{ kibana_version }}.tar.gz
 
-- name: debug variables
-  debug: msg=" variable concatication = {{ kibana_doc_root }}/{{ kibana_version }}/{{ kibana_config_file }}"
+#- name: debug variables
+#  debug: msg=" variable concatication = {{ kibana_doc_root }}/{{ kibana_version }}/{{ kibana_config_file }}"
 
 - name: Replace the URI of the elasticSearch service in config.js on Kibana server
   lineinfile: >

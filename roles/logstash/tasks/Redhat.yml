@@ -1,13 +1,19 @@
 ---
 
-- name: Ensure libselinux-python is installed
-  yum: pkg=libselinux-python state=installed
+#- name: Install libselinux-python manully
+#  yum: name=ftp://bo.mirror.garr.it/pub/1/fedora/linux/development/rawhide/x86_64/os/Packages/l/libselinux-python-2.3-3.fc21.x86_64.rpm state=installed
 
-- name: Ensure epel is installed
-  yum: name=http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm state=installed
+- name: Ensure epel is installed correctly
+  yum: name=http://mirror.oss.ou.edu/epel/6/i386/epel-release-6-8.noarch.rpm state=installed
+
+#- name: Ensure epel is installed correctly
+#  yum: name=http://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm state=installed
 
 - name: Ensure epel signing key is installed
   rpm_key: key=/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
+
+#- name: Ensure libselinux-python is installed
+#  yum: pkg=libselinux-python state=installed
 
 - name: Ensure elasticsearch signing key is installed
   rpm_key: key={{url_gpg_key}} state=present
@@ -61,6 +67,7 @@
 - name: Unarchive source to vhost
   command: tar -C /var/www/html/ -zxf /tmp/{{ kibana_version }}.tar.gz
 
+
 - name: Replace the URI of the elasticSearch service in config.js on Kibana server
   lineinfile: >
     dest='/var/www/html/kibana-3.1.0/config.js'
@@ -68,5 +75,15 @@
     state=present
     line='elasticsearch: "{{ elasticsearch_URL }}:{{ elasticsearch_port }}",'
 
-- name: debug variables
-  debug: msg="variable concatication = {{ kibana_doc_root }}/{{ kibana_version }}/{{ kibana_config_file }}"
+- name: Open 80 port on iptables
+  command: iptables -I INPUT -p tcp --dport 80 -j ACCEPT
+  notify:
+    - restart iptables
+
+- name: save iptables
+  command: iptables-save
+  notify:
+    - restart iptables
+
+#- name: debug variables
+#  debug: msg="variable concatication = {{ kibana_doc_root }}/{{ kibana_version }}/{{ kibana_config_file }}"

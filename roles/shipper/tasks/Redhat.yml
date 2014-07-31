@@ -1,10 +1,23 @@
 ---
 
-- name: Ensure libselinux-python is installed
-  yum: pkg=libselinux-python state=installed
+#- name: Install libselinux-python manully
+#  yum: name=ftp://bo.mirror.garr.it/pub/1/fedora/linux/development/rawhide/x86_64/os/Packages/l/libselinux-python-2.3-3.fc21.x86_64.rpm state=installed
+
+- name: Ensure epel is installed correctly
+  yum: name=http://mirror.oss.ou.edu/epel/6/i386/epel-release-6-8.noarch.rpm state=installed
+
+- name: Ensure epel signing key is installed
+  rpm_key: key=/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
+
+#- name: Ensure libselinux-python is installed
+#  yum: pkg=libselinux-python state=installed
+
+#- name: Ensure elasticsearch apt signing key is installed
+#  rpm_key: key={{ url_gpg_key }} state=present
+  # may need manully installed by "rpm --import http://packages.elasticsearch.org/GPG-KEY-elasticsearch"
 
 - name: Ensure elasticsearch apt signing key is installed
-  rpm_key: key={{ url_gpg_key }} state=present
+  command: rpm --import http://packages.elasticsearch.org/GPG-KEY-elasticsearch
 
 - name: Ensure logstash repository is installed
   copy: src=Logstash-yum.repo
@@ -39,7 +52,12 @@
 #- name: backup logfiles permission
 #  shell: ls -l /var/log/ > /var/log/permission.txt
 
-- name: Change log files permission
-  shell: chmod 644 /var/log/ceph.log
+- name: Check whether ceph.log exists
+  stat: path=/var/log/ceph/ceph.log
+  register: fileexists
+
+- name: Change ceph.log permission if it exists
+  shell: chmod 644 /var/log/ceph/ceph.log
+  when: fileexists.stat.isdir is defined and fileexists.stat.isdir == False
   notify:
     - restart logstash

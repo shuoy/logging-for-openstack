@@ -1,9 +1,9 @@
 #!/bin/bash
 
 prefix=10.1.0.
-start=106
+start=104
 end=114
-special=10.1.2.115
+#special=10.1.2.115
 master=154
 
 read -p "Input the LDAP username on servers: " user
@@ -18,4 +18,4 @@ do
 	./copysshkey.sh $user $prefix$i $passwd
 done
 
-./copysshkey.sh $user $special $passwd
+#./copysshkey.sh $user $special $passwd
