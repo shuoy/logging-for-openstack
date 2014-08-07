@@ -10,9 +10,12 @@ rm ./Vagrantfile
 if [ $os_family = "DEBIAN" ]; then
   echo "Run Vagrant machines with Debian images"
   ln -s ./Vagrantfile.debian ./Vagrantfile
-else
+elif [ $os_family = "REDHAT" ]; then
   echo "Run Vagrant machines with CentOS images"
   ln -s ./Vagrantfile.redhat ./Vagrantfile
+else
+  echo "Usage: run.sh [debian|redhat]"
+  exit 1
 fi
 
 #Create VMs if needed

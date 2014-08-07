@@ -1,3 +1,10 @@
+---
+
+- hosts: shippernodes
+  sudo: True
+  roles:
+    - { role: shipper }
+
 - hosts: logstashnodes
   sudo: True
   roles:
@@ -8,8 +15,3 @@
   roles:
     - { role: searchengine }
     - { role: kibana}
-
-- hosts: kibananodes
-  sudo: True
-  roles:
-    - { role: kibana }

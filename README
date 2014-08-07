@@ -1,10 +1,21 @@
+Tested with Vagrant 1.5.2 and Ansible 1.5.4 on OSX 10.9.3
+    NOTE: other OS to be tested and to be documented
+
+Software Requiement:
+    ansible vagrant (suppose virtualbox and ruby are installed)
+    (for Mac OSX)
+      #ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)" & brew install ansible
+      #brew tap phinze/homebrew-cask
+      #brew install brew-cask
+      #brew cask install vagrant
+
+
+
 Usage Instructions:
   # ./run.sh [Debian | Redhat]
 
-
-
-
-Tested with Vagrant 1.5.2 and Ansible 1.5.4 on OSX 10.9.3
+Production Usage:
+  1. You first need to edit ./group_vars/all file to so that the variables reflect your production cluster design
 
 Structure of the Software
 
@@ -18,6 +29,6 @@ Structure of the Software
  - .ansible.cfg (configuration for testing environment)
  - site.yml (main playbook)
 
-   /roles...
+   ./roles...
 
 

@@ -5,8 +5,9 @@ kibana_url: "https://download.elasticsearch.org/kibana/kibana/"
 kibana_version: "kibana-3.0.0milestone4"
 kibana_config_file: "config.js"
 
-elasticsearch_URL: "http://192.168.33.12"
-elasticsearch_port: "9200"
+#elasticsearch_URL: "http://192.168.33.12"
+#elasticsearch_port: "9200"
+# discovery.zen.ping.unicast.hosts: ["host1", "host2:port"] -- this is needed
 
 # User / password to access the kibana interface (ToBeOverrided)
 kibana_user: "admin"
