@@ -1,0 +1,28 @@
+---
+# Install Redis Server Itself
+- name: "Install Redis server"
+  apt: pkg={{redis.deb.package}} state=installed
+
+- name: "Bind Redis server to all interfaces"
+  lineinfile: dest=/etc/redis/redis.conf state=present regexp="^#?bind" line="bind 0.0.0.0"
+  notify:
+    - "Restart Redis"
+
+- name: "Ensure Redis server is running"
+  service: name={{ redis.deb.service }} state=started
+ 
+
+# Install Redmon
+- name: "Install Redmon dependencies"
+  apt: pkg={{ item }} state=installed update_cache=yes
+  with_items: redmon.deb.dependencies
+
+- name: "Install Redmon gems"
+  gem: name={{ item }} state=present user_install=no
+  with_items: redmon.gems
+
+- name: "Install Redmon init script"
+  template: src=redmon.j2 dest=/etc/init.d/{{ redmon.service }} owner=root group=root mode=0755
+
+- name: "Ensure Redis server is running"
+  service: name={{ redmon.service }} state=started

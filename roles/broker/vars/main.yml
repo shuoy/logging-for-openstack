@@ -1,0 +1,20 @@
+---
+
+redis:
+  deb:
+    package: 'redis-server'
+    service: 'redis-server'
+
+redmon:
+  service: 'redmon'
+  deb:
+    dependencies:
+      - 'git'
+      - 'ruby1.9.1'
+      - 'ruby1.9.1-dev'      
+      - 'g++'
+      - 'make'
+  gems:
+    - 'bundler'
+    - 'redmon'
+  bin: '/usr/local/bin/redmon'

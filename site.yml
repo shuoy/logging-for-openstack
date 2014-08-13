@@ -5,6 +5,11 @@
   roles:
     - { role: shipper }
 
+- hosts: brokernodes
+  sudo: True
+  roles:
+    - { role: broker }
+
 - hosts: logstashnodes
   sudo: True
   roles:
