@@ -1,0 +1,23 @@
+input {
+  redis {
+    host => "{{ redis_host }}"
+    type => "elasticsearch"
+    data_type => "list"
+    key => "test--key"
+    #codec => json
+  }
+}
+
+output {
+  stdout {
+    #codec => rubydebug
+  }
+  file {
+    path => "/tmp/mydebug.txt"
+  }
+
+  elasticsearch {
+    host => "{{ elasticsearch_host }}"
+    protocol => http
+  }
+}

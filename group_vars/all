@@ -1,4 +1,4 @@
 ---
 redis_host: 192.168.33.11
-logstash: 192.168.33.22
+elasticsearch_host: 192.168.33.21
 
