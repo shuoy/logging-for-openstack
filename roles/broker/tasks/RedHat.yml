@@ -1,0 +1,67 @@
+---
+# Install Redis Server Itself
+
+#- name: Ensure logstash repository is installed
+#  copy: src=Logstash-yum.repo
+#        dest=/etc/yum.repos.d/
+#        owner=root group=root mode=0644
+#
+#- name: "Install Redis server"
+#  yum: pkg={{redis.deb.package}} state=installed
+- name: yum install epel packages (needed by Redis Server)
+  yum: name=http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm state=present
+
+- name: yum install remi packages (needed by Redis Server)
+  yum: name=http://rpms.famillecollet.com/enterprise/remi-release-6.rpm state=present
+
+- name: "Install Redis server"
+  yum: pkg={{redis.redhat.package}} state=installed
+
+- name: "Bind Redis server to all interfaces"
+  lineinfile: dest=/etc/redis.conf state=present regexp="^#?bind" line="bind 0.0.0.0"
+  notify:
+    - "Restart Redis"
+
+- name: "Ensure Redis server is running"
+  service: name={{ redis.redhat.service }} state=started
+
+- name: Ensure redis boots on startup
+  command: chkconfig redis on
+  notify:
+    - "Restart Redis"
+ 
+
+# Install Redmon
+#- name: "Install Redmon dependencies"
+#  yum: pkg={{ item }} state=installed
+#  with_items: redmon.redhat.dependencies
+
+#- name: "Check whether rvm is installed already"
+#  stat: path=/etc/profile.d/rvm.sh
+#  register: rvm_folder
+
+#- name: "Install RVM"
+#  shell: "curl -sSL https://get.rvm.io | bash"
+#  when: rvm_folder.stat.isdir is not defined
+
+#- name: "rvm requirements"
+#  shell: "/usr/local/rvm/bin/rvm requirements"
+
+#- name: "update RVM to 2.1.2"
+#  shell: "/usr/local/rvm/bin/rvm install 2.1.2"
+
+#- name: "Install Ruby"
+#  yum: pkg={{ item }} state=present
+#  with_items:
+#    - ruby
+#    - rubygems
+
+#- name: "Install Redmon gems"
+#  gem: name={{ item }} state=present user_install=no
+#  with_items: redmon.gems
+
+#- name: "Install Redmon init script"
+#  template: src=redmon.j2 dest=/etc/init.d/{{ redmon.service }} owner=root group=root mode=0755
+
+#- name: "Ensure Redmon server is running"
+#  service: name={{ redmon.service }} state=started

@@ -1,7 +1,7 @@
 - name: Install Apache
-  apt: pkg={{ item }} state=installed
+  yum: pkg={{ item }} state=installed
   with_items:
-    - apache2
+    - httpd
     - python-passlib
 
 - name: Disable default vhost

@@ -6,10 +6,11 @@
 - name: "Bind Redis server to all interfaces"
   lineinfile: dest=/etc/redis/redis.conf state=present regexp="^#?bind" line="bind 0.0.0.0"
   notify:
-    - "Restart Redis"
+    - Restart Redis
+    
 
-- name: "Ensure Redis server is running"
-  service: name={{ redis.deb.service }} state=started
+- name: "Ensure Redis server get restarted at least once"
+  service: name={{ redis.deb.service }} state=restarted
  
 
 # Install Redmon

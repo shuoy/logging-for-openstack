@@ -1,4 +1,6 @@
 ---
+- include: RedHat.yml
+  when: ansible_os_family == 'RedHat'
+- include: Debian.yml
+  when: ansible_os_family == 'Debian'
 
-- name: reload apache
-  service: name=apache2 state=reloaded

@@ -6,8 +6,8 @@ input {
 }
 
 output {
-  stdout{
-    codec => rubydebug
+  file {
+    path => "/tmp/mydebug.txt"
   }
   redis {
     host => "{{ redis_host }}"

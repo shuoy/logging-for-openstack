@@ -1,0 +1,4 @@
+1. It looks like we need restart shipper to make shipper talk to Redis
+   if we start shipper first and then start broker.
+   - now we 'workaround' by lastly bring up shipper nodes (see the order in site.yml)
+   - is that a well-know bug for logstash?

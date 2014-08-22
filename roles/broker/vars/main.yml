@@ -4,6 +4,9 @@ redis:
   deb:
     package: 'redis-server'
     service: 'redis-server'
+  redhat:
+    package: 'redis'
+    service: 'redis'
 
 redmon:
   service: 'redmon'
@@ -14,6 +17,12 @@ redmon:
       - 'ruby1.9.1-dev'      
       - 'g++'
       - 'make'
+  redhat:
+    dependencies:
+      - 'git'
+      - 'ruby1.9.3'
+      - 'g++'
+      - 'make'      
   gems:
     - 'bundler'
     - 'redmon'

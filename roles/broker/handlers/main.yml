@@ -1,6 +1,7 @@
 ---
-- name: "Restart Redis"
-  service: name={{ redis.deb.service }} state=restarted
 
-- name: "Restart Redmon"
-  service: name={{ redmon.service }} state=restarted
+- include: RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+- include: Debian.yml
+  when: ansible_os_family == 'Debian'

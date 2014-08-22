@@ -1,10 +1,5 @@
 ---
 
-- hosts: shippernodes
-  sudo: True
-  roles:
-    - { role: shipper }
-
 - hosts: brokernodes
   sudo: True
   roles:
@@ -20,3 +15,10 @@
   roles:
     - { role: searchengine }
     - { role: kibana}
+
+
+- hosts: shippernodes
+  sudo: True
+  roles:
+    - { role: shipper }
+
