@@ -1,17 +1,22 @@
 input {
   file {
-    type => "syslog"
-    path => ["/var/log/syslog","/var/log/kern.log","/var/log/auth.log","/var/log/boot.log"]
+    path => [{{ file_list.name_debian }}]
+    type => "{{ file_list.type }}"
   }
+  file {
+    path => [{{ file_list.name_redhat }}]
+    type => "{{ file_list.type }}"
+  }
+
 }
 
 output {
   file {
-    path => "/tmp/mydebug.txt"
+    path => "{{ debug_output }}"
   }
   redis {
     host => "{{ redis_host }}"
     data_type => "list"
-    key => "test--key"
+    key => "{{ redis_key }}"
   }
 }

@@ -1,28 +1,29 @@
-!#/bin/bash
+#!/bin/bash
 
-os_family=$(echo $1 | tr '[:lower:]' '[:upper:]')
-printf "$os_family \n\n"
+machine_type=$(echo $1 | tr '[:lower:]' '[:upper:]')
+os_family=$(echo $2 | tr '[:lower:]' '[:upper:]')
 
-# Cleanup the Vagrantfile that linked by previous run(s)
-rm ./Vagrantfile
+printf "\n$machine_type\t$os_family\n\n"
 
-# Make a softlink so that Vagrant can work with the right OS
-if [ $os_family = "DEBIAN" ]; then
-  echo "Run Vagrant machines with Debian images"
-  ln -s ./Vagrantfile.debian ./Vagrantfile
-elif [ $os_family = "REDHAT" ]; then
-  echo "Run Vagrant machines with CentOS images"
-  ln -s ./Vagrantfile.redhat ./Vagrantfile
+rm -rf ./Vagrantfile
+#source rc
+export ANSIBLE_CONFIG=.ansible.cfg
+
+if [ x$machine_type = xVAGRANT ]; then
+  if [ x$os_family = xDEBIAN ]; then
+    ln -s ./Vagrantfile.debian ./Vagrantfile
+  elif [ x$os_family = xREDHAT ]; then
+    ln -s ./Vagrantfile.redhat ./Vagrantfile
+  else
+    echo "Usage: run.sh [vagrant|physical] [debian|redhat(physical machine doesn't need)]"
+    exit 2
+  fi
+  vagrant up
+  ansible-playbook -i hosts_vagrant_ansible site.yml
+elif [ x$machine_type = xPHYSICAL ]; then
+  ansible-playbook -i hosts_physical_ansible site.yml
 else
-  echo "Usage: run.sh [debian|redhat]"
+  echo "Usage: run.sh [vagrant|physical] [debian|redhat(physical machine doesn't need)]"
   exit 1
 fi
-
-#Create VMs if needed
-vagrant up
-
-
-# Run the Playbook on to the corresponding VMs
-source rc
-ansible-playbook -i hosts_test site.yml
 

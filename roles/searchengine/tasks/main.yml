@@ -4,7 +4,14 @@
 - include: Debian.yml
   when: ansible_os_family == 'Debian'
 
+#- name: Ensure elasticsearch config is in place
+#  template: src={{ elasticsearch_conf.template }}
+#            dest={{ elasticsearch_conf.destination }}
+#            owner=root group=root mode=0644
+#  notify:
+#    - restart elasticsearch
+
 - name: Ensure elasticsearch config is in place
-  copy: src=elasticsearch.yml dest=/etc/elasticsearch/elasticsearch.yml
+  copy: src=elasticsearch.yml dest={{ elasticsearch_conf.destination }}
   notify:
     - restart elasticsearch

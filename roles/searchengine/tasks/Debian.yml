@@ -1,15 +1,21 @@
 ---
-- name: Ensure python-pycurl is installed
-  apt: pkg=python-pycurl state=installed
+
+#- name: Ensure python-pycurl is installed
+#  apt: pkg=python-pycurl state=installed
 
 - name: Ensure Elasticsearch signing key is installed
-  apt_key: url={{url_es_gpg_key}} state=present
+  apt_key: url={{ url_es_gpg_key }}
 
 - name: Ensure Elasticsearch 1.2.x repository is installed
-  apt_repository: repo="deb {{url_es_reop_1_2}} stable main" state=present update_cache=yes
+  apt_repository: repo="deb {{ url_es_pkg }} stable main" update_cache=yes
 
 - name: Ensure elasticsearch is installed
-  apt: pkg={{item}} state=installed
+  apt: pkg={{item}} state=latest
   with_items:
     - openjdk-7-jre
-    - elasticsearch state=installed
+    - elasticsearch
+
+- name: Ensure elasticsearch boots on startup
+  command: update-rc.d elasticsearch defaults
+  notify:
+    - restart elasticsearch

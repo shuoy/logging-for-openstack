@@ -2,5 +2,5 @@
 - name: "Restart Redis"
   service: name={{ redis.redhat.service }} state=restarted
 
-#- name: "Restart Redmon"
-#  service: name={{ redmon.service }} state=restarted
+- name: "Restart Redmon"
+  service: name={{ redmon.service }} state=restarted

@@ -1,5 +1,8 @@
 ---
 
+# Epel rpm url
+url_epel_rpm: http://mirror.oss.ou.edu/epel/6/i386/epel-release-6-8.noarch.rpm
+
 redis:
   deb:
     package: 'redis-server'
@@ -20,9 +23,9 @@ redmon:
   redhat:
     dependencies:
       - 'git'
-      - 'ruby1.9.3'
-      - 'g++'
-      - 'make'      
+      - 'ruby'
+      - 'gcc-c++'
+      - 'make'
   gems:
     - 'bundler'
     - 'redmon'

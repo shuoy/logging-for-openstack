@@ -1,15 +1,10 @@
 ---
-# Install Redis Server Itself
 
-#- name: Ensure logstash repository is installed
-#  copy: src=Logstash-yum.repo
-#        dest=/etc/yum.repos.d/
-#        owner=root group=root mode=0644
-#
-#- name: "Install Redis server"
-#  yum: pkg={{redis.deb.package}} state=installed
-- name: yum install epel packages (needed by Redis Server)
-  yum: name=http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm state=present
+- name: Ensure epel is installed correctly
+  yum: name={{ url_epel_rpm }} state=present
+
+- name: Ensure epel signing key is installed
+  rpm_key: key=/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
 
 - name: yum install remi packages (needed by Redis Server)
   yum: name=http://rpms.famillecollet.com/enterprise/remi-release-6.rpm state=present
@@ -29,39 +24,39 @@
   command: chkconfig redis on
   notify:
     - "Restart Redis"
- 
 
-# Install Redmon
-#- name: "Install Redmon dependencies"
-#  yum: pkg={{ item }} state=installed
-#  with_items: redmon.redhat.dependencies
+- name: Install Redmon dependencies
+  yum: pkg={{ item }} state=installed
+  with_items: redmon.redhat.dependencies
 
-#- name: "Check whether rvm is installed already"
-#  stat: path=/etc/profile.d/rvm.sh
-#  register: rvm_folder
+- name: "Check whether rvm is installed already"
+  stat: path=/etc/profile.d/rvm.sh
+  register: rvm_folder
 
-#- name: "Install RVM"
-#  shell: "curl -sSL https://get.rvm.io | bash"
-#  when: rvm_folder.stat.isdir is not defined
+- name: "Install RVM"
+  shell: "curl -sSL https://get.rvm.io | bash"
+  when: rvm_folder.stat.isdir is not defined
 
-#- name: "rvm requirements"
-#  shell: "/usr/local/rvm/bin/rvm requirements"
+- name: "rvm requirements"
+  shell: "/usr/local/rvm/bin/rvm requirements"
 
 #- name: "update RVM to 2.1.2"
 #  shell: "/usr/local/rvm/bin/rvm install 2.1.2"
+#  ignore_errors: True
 
-#- name: "Install Ruby"
-#  yum: pkg={{ item }} state=present
-#  with_items:
-#    - ruby
-#    - rubygems
+- name: "Install Ruby"
+  yum: pkg={{ item }} state=present
+  with_items:
+    - ruby
+    - rubygems
 
-#- name: "Install Redmon gems"
-#  gem: name={{ item }} state=present user_install=no
-#  with_items: redmon.gems
+- name: "Install Redmon gems bundler and redmon"
+  gem: name={{ item }} state=present
+  with_items: redmon.gems
+  ignore_errors: True
 
-#- name: "Install Redmon init script"
-#  template: src=redmon.j2 dest=/etc/init.d/{{ redmon.service }} owner=root group=root mode=0755
+- name: "Install Redmon init script"
+  template: src=redmon.j2 dest=/etc/init.d/{{ redmon.service }} owner=root group=root mode=0755
 
-#- name: "Ensure Redmon server is running"
-#  service: name={{ redmon.service }} state=started
+- name: "Ensure Redmon server is running"
+  service: name={{ redmon.service }} state=started

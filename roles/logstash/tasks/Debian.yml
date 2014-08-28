@@ -1,26 +1,20 @@
 ---
 
-- name: Ensure python-pycurl is installed
-  apt: pkg=python-pycurl state=installed
-
 - name: Ensure Elasticsearch apt signing key is installed
-  apt_key: url={{url_gpg_key}} state=present
+  apt_key: url={{ url_es_gpg_key }} state=present
 
 - name: Ensure Logstash repository is installed
-  apt_repository: repo="deb {{url_logstash_pkg}} stable main"
-                  update_cache=yes
+  apt_repository: repo="deb {{ url_logstash_pkg }} stable main"  update_cache=yes
 
 - name: Ensure logstash is installed
-  apt: pkg={{item}} state=installed
+  apt: pkg={{item}}
   with_items:
     - openjdk-7-jre
     - logstash
     - logstash-contrib
 
 - name: Ensure logstash config is in place
-  template: src={{ logstash_conf.template }}
-            dest={{ logstash_conf.destination }}
-            owner=root group=root mode=0644
+  template: src={{ logstash_conf.template }} dest={{ logstash_conf.destination }} owner=root group=root mode=0644
   notify:
     - restart logstash
 

@@ -1,0 +1,24 @@
+---
+
+- name: Ensure elasticsearch rpm signing key is installed
+  rpm_key: key={{ url_es_gpg_key }} state=present
+
+- name: Ensure logstash repository is installed
+  copy: src=Logstash-yum.repo dest=/etc/yum.repos.d/Logstash-yum.repo owner=root group=root mode=0644
+
+- name: Ensure java and logstash are installed
+  yum: name={{ item }} state=present
+  with_items:
+    - java-1.7.0-openjdk
+    - logstash
+    - logstash-contrib
+
+- name: Ensure logstash config is in place
+  template: src={{ logstash_conf.template }} dest={{ logstash_conf.destination }} owner=root group=root mode=0644
+  notify:
+    - restart logstash
+
+- name: Ensure logstash boots on startup
+  command: chkconfig logstash on
+  notify:
+    - restart logstash

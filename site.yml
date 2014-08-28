@@ -16,7 +16,6 @@
     - { role: searchengine }
     - { role: kibana}
 
-
 - hosts: shippernodes
   sudo: True
   roles:
