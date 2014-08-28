@@ -7,16 +7,10 @@
   copy: src=Logstash-yum.repo dest=/etc/yum.repos.d/Logstash-yum.repo owner=root group=root mode=0644
 
 - name: Ensure java and logstash are installed
-  yum: name={{ item }}
+  yum: name={{ item }} state=present
   with_items:
     - java-1.7.0-openjdk
     - logstash
-
-#- name: Ensure java and logstash are installed
-#  yum: pkg={{ item }}
-#  with_items:
-#    - java-1.7.0-openjdk
-#    - logstash
 
 - name: Ensure logstash config is in place
   template: src={{ logstash_conf.template }} dest={{ logstash_conf.destination }} owner=root group=root mode=0644
@@ -32,14 +26,3 @@
   shell: chmod 644 /var/log/messages /var/log/secure /var/log/boot.log
   notify:
     - restart logstash
-
-
-#- name: Check whether ceph.log exists
-#  stat: path=/var/log/ceph/ceph.log
-#  register: fileexists
-
-#- name: Change ceph.log permission if it exists
-#  shell: chmod 644 /var/log/ceph/ceph.log
-#  when: fileexists.stat.isdir is defined and fileexists.stat.isdir == False
-#  notify:
-#    - restart logstash

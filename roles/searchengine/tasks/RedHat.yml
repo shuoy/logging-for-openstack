@@ -1,28 +1,16 @@
 ---
 
-#- name: Ensure python-pycurl is installed
-#  yum: pkg=python-pycurl state=installed
-
 - name: Ensure Elasticsearch signing key is installed
-  rpm_key: key={{ url_es_gpg_key }} state=present
+  rpm_key: key={{ url_es_gpg_key }}
 
 - name: Ensure the repo file for ElasticSearch is ready
   copy: src=Elasticsearch-yum.repo dest=/etc/yum.repos.d/Elasticsearch_yum.repo owner=root group=root mode=0644
 
 - name: Ensure openjdk and elasticsearch is installed
-  yum: pkg={{ item }}
+  yum: name={{ item }}
   with_items:
     - java-1.7.0-openjdk
     - elasticsearch
-
-#for test local
-- name: Replace the URI of the ElasticSearch service in config.js on Kibana server
-  lineinfile: >
-    dest=/etc/init.d/elasticsearch
-    regexp='export ES_HEAP_SIZE$'
-    state=present
-    line='export ES_HEAP_SIZE=50M'
-
 
 - name: Ensure elasticsearch boots on startup
   command: chkconfig elasticsearch on

@@ -7,7 +7,7 @@
   apt_repository: repo="deb {{ url_logstash_pkg }} stable main" update_cache=yes
 
 - name: Ensure java and logstash are installed
-  apt: pkg={{ item }}
+  apt: name={{ item }} state=present
   with_items:
     - openjdk-7-jre
     - logstash

@@ -1,7 +1,7 @@
 ---
 
 - name: Install Apache
-  yum: pkg={{ item }} state=installed
+  yum: name={{ item }} state=installed
   with_items:
     - httpd
     - python-passlib

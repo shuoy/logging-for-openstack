@@ -10,7 +10,7 @@
   yum: name=http://rpms.famillecollet.com/enterprise/remi-release-6.rpm state=present
 
 - name: "Install Redis server"
-  yum: pkg={{redis.redhat.package}} state=installed
+  yum: name={{ redis.redhat.package }} state=installed
 
 - name: "Bind Redis server to all interfaces"
   lineinfile: dest=/etc/redis.conf state=present regexp="^#?bind" line="bind 0.0.0.0"
@@ -26,7 +26,7 @@
     - "Restart Redis"
 
 - name: Install Redmon dependencies
-  yum: pkg={{ item }} state=installed
+  yum: name={{ item }} state=installed
   with_items: redmon.redhat.dependencies
 
 - name: "Check whether rvm is installed already"
@@ -45,7 +45,7 @@
 #  ignore_errors: True
 
 - name: "Install Ruby"
-  yum: pkg={{ item }} state=present
+  yum: name={{ item }} state=present
   with_items:
     - ruby
     - rubygems

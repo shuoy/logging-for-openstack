@@ -1,8 +1,5 @@
 ---
 
-#- name: Ensure python-pycurl is installed
-#  apt: pkg=python-pycurl state=installed
-
 - name: Ensure Elasticsearch signing key is installed
   apt_key: url={{ url_es_gpg_key }}
 
@@ -10,7 +7,7 @@
   apt_repository: repo="deb {{ url_es_pkg }} stable main" update_cache=yes
 
 - name: Ensure elasticsearch is installed
-  apt: pkg={{item}} state=latest
+  apt: name={{ item }} state=latest
   with_items:
     - openjdk-7-jre
     - elasticsearch
