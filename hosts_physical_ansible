@@ -1,0 +1,14 @@
+[shippernodes]
+shipper1 ansible_ssh_host=192.168.33.10 ansible_ssh_user=vagrant
+
+[brokernodes]
+broker ansible_ssh_host=192.168.33.11 ansible_ssh_user=vagrant
+
+[logstashnodes]
+logstash ansible_ssh_host=192.168.33.20 ansible_ssh_user=vagrant
+
+[searchnodes]
+elasticsearch ansible_ssh_host=192.168.33.21 ansible_ssh_user=vagrant
+
+# [kibananodes]
+# kibana ansible_ssh_host=192.168.33.22 ansible_ssh_user=vagrant
