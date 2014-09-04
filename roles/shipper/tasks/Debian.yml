@@ -1,25 +1,19 @@
 ---
 
-- name: Ensure python-pycurl is installed
-  apt: pkg=python-pycurl state=installed
-  
 - name: Ensure elasticsearch apt signing key is installed
-  apt_key: url={{ url_logstash_gpg_key }} state=present
+  apt_key: url={{ url_es_gpg_key }} state=present
 
 - name: Ensure logstash repository is installed
-  apt_repository: repo="deb {{ url_logstash_pkg }} stable main"
-                  update_cache=yes
+  apt_repository: repo="deb {{ url_logstash_pkg }} stable main" update_cache=yes
 
 - name: Ensure java and logstash are installed
-  apt: pkg={{ item }} state=installed
+  apt: name={{ item }} state=present
   with_items:
     - openjdk-7-jre
     - logstash
-
+    
 - name: Ensure logstash config is in place
-  template: src={{ logstash_conf.template }}
-            dest={{ logstash_conf.destination }}
-            owner=root group=root mode=0644
+  template: src={{ logstash_conf.template }} dest={{ logstash_conf.destination }} owner=root group=root mode=0644
   notify:
     - restart logstash
 
@@ -27,9 +21,6 @@
   command: update-rc.d logstash defaults
   notify:
     - restart logstash
-
-- name: backup logfiles permission
-  shell: ls -l /var/log/ > /var/log/permission.txt
 
 - name: Change log files permission
   shell: chmod 644 /var/log/syslog /var/log/kern.log /var/log/auth.log /var/log/boot.log

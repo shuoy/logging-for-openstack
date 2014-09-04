@@ -1,26 +1,19 @@
 ---
 
-- name: Ensure python-pycurl is installed
-  yum: pkg=python-pycurl state=installed
-  
 - name: Ensure elasticsearch apt signing key is installed
-  rpm_key: key={{ url_logstash_gpg_key }} state=present
+  rpm_key: key={{ url_es_gpg_key }} state=present
 
 - name: Ensure logstash repository is installed
-  copy: src=Logstash-yum.repo
-        dest=/etc/yum.repos.d/
-        owner=root group=root mode=0644
+  copy: src=Logstash-yum.repo dest=/etc/yum.repos.d/Logstash-yum.repo owner=root group=root mode=0644
 
 - name: Ensure java and logstash are installed
-  yum: pkg={{ item }} state=installed
+  yum: name={{ item }} state=present
   with_items:
     - java-1.7.0-openjdk
     - logstash
 
 - name: Ensure logstash config is in place
-  template: src={{ logstash_conf.template }}
-            dest={{ logstash_conf.destination }}
-            owner=root group=root mode=0644
+  template: src={{ logstash_conf.template }} dest={{ logstash_conf.destination }} owner=root group=root mode=0644
   notify:
     - restart logstash
 
@@ -28,9 +21,6 @@
   command: chkconfig logstash on
   notify:
     - restart logstash
-
-- name: backup logfiles permission
-  shell: ls -l /var/log/ > /var/log/permission.txt
 
 - name: Change log files permission
   shell: chmod 644 /var/log/messages /var/log/secure /var/log/boot.log

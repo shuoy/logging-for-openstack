@@ -1,18 +1,19 @@
 ---
-- name: Ensure python-pycurl is installed
-  yum: pkg=python-pycurl state=installed
 
 - name: Ensure Elasticsearch signing key is installed
-  rpm_key: key={{url_es_gpg_key}} state=present
+  rpm_key: key={{ url_es_gpg_key }}
 
-- name: Ensure the repo file for ElasticSearch is ready at the destination machines
-  copy: src=elasticsearch_yum.repo
-        dest=/etc/yum.repos.d/
-        owner=root group=root mode=0644
+- name: Ensure the repo file for ElasticSearch is ready
+  copy: src=Elasticsearch-yum.repo dest=/etc/yum.repos.d/Elasticsearch_yum.repo owner=root group=root mode=0644
 
-- name: Ensure openjdk is installed
-  yum:  pkg=java-1.7.0-openjdk state=installed
+- name: Ensure openjdk and elasticsearch is installed
+  yum: name={{ item }}
+  with_items:
+    - java-1.7.0-openjdk
+    - elasticsearch
 
-- name: Ensure ElasticSearch is installed
-  yum: pkg=elasticsearch state=installed
+- name: Ensure elasticsearch boots on startup
+  command: chkconfig elasticsearch on
+  notify:
+    - restart elasticsearch
 

@@ -1,0 +1,34 @@
+---
+
+#host ip and port
+redis_host: 192.168.33.11
+elasticsearch_host: 192.168.33.21
+elasticsearch_port: 9200
+
+
+# File list to be monitored
+file_list:
+    name_debian: '"/var/log/syslog","/var/log/kern.log","/var/log/auth.log","/var/log/boot.log"'
+    name_redhat: '"/var/log/messages","/var/log/secure","/var/log/lastlog"'
+    type: syslog
+
+#list key in redis
+redis_key: logstash
+
+#elasticsearch parameter
+es_cluster_name: logstash_es
+es_node_name: logstash_es_node
+es_network_host: 0.0.0.0
+discovery_zen_ping_multicast_status: 'false'
+
+# Debug output file
+debug_output: /tmp/logging-for-openstack{{ ansible_date_time.date }}.txt
+
+# Signing key for elasticsearch and logstash installations
+url_es_gpg_key: http://packages.elasticsearch.org/GPG-KEY-elasticsearch
+
+# logstash debian repository (1.4.x)
+url_logstash_pkg: http://packages.elasticsearch.org/logstash/1.4/debian
+
+# elasticsearch debian repository(1.2.x)
+url_es_pkg: http://packages.elasticsearch.org/elasticsearch/1.2/debian
