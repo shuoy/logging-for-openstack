@@ -12,7 +12,7 @@ Software Requiement:
 
 
 Usage Instructions:
-  # ./run.sh [Debian | Redhat]
+  # ./run.sh [physical | vagrant ]  [Debian | Redhat]
 
 Production Usage:
   1. You first need to edit ./group_vars/all file to so that the variables reflect your production cluster design
