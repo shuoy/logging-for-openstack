@@ -1,1 +1,1 @@
-./Vagrantfile.redhat
+./Vagrantfile.debian

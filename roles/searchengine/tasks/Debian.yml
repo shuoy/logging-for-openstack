@@ -1,5 +1,8 @@
 ---
 
+- name: Install pycurl module
+  apt: name=python-pycurl state=present
+
 - name: Ensure Elasticsearch signing key is installed
   apt_key: url={{ url_es_gpg_key }}
 
