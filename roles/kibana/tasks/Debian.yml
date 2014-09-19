@@ -9,7 +9,7 @@
     - restart apache
 
 - name: Disable default vhost
-  command: /usr/sbin/a2dissite default
+  command: /usr/sbin/a2dissite 000-default
   notify:
     - restart apache
 
@@ -17,7 +17,7 @@
   file: path={{ kibana_doc_root }} owner=www-data group=www-data mode=0755 state=directory
 
 - name: Create apache vhost config from template
-  template: src=vhost.j2 dest=/etc/apache2/sites-available/kibana owner=root group=root mode=0644
+  template: src=vhost.j2 dest=/etc/apache2/sites-available/kibana.conf owner=root group=root mode=0644
 
 - name: Fetch Kibana source
   get_url: url={{ kibana_url }}{{ kibana_version }}.tar.gz dest=/tmp/{{ kibana_version }}.tar.gz
@@ -30,7 +30,7 @@
     dest={{ kibana_doc_root }}/{{ kibana_version }}/{{ kibana_config_file }}
     regexp='(elasticsearch.* \"http.*)$'
     state=present
-    line='elasticsearch: "http://{{ elasticsearch_host }}:{{ elasticsearch_port }}", '
+    line='elasticsearch: "http://{{ elasticsearch_host_web }}:{{ elasticsearch_port }}", '
 
 - name: Set Permissions
   command: /bin/chown -R www-data.www-data {{ kibana_doc_root }}/{{ kibana_version }}

@@ -1,8 +1,9 @@
 ---
 
 #host ip and port
-redis_host: 192.168.33.11
-elasticsearch_host: 192.168.33.21
+redis_host: 172.20.44.5
+elasticsearch_host_web: 10.2.1.159
+elasticsearch_host: 172.20.44.8
 elasticsearch_port: 9200
 
 
