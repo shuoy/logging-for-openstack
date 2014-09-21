@@ -1,6 +1,6 @@
 ---
 
-- name: Install Apache
+- name: Install Apache and python-passlib
   yum: name={{ item }} state=installed
   with_items:
     - httpd
