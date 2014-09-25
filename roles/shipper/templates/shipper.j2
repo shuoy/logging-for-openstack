@@ -7,7 +7,15 @@ input {
     path => [{{ file_list.name_redhat }}]
     type => "{{ file_list.type }}"
   }
+  file {
+    path => ["/tmp/fake_log"]
+  }
+}
 
+filter {
+  grok {
+    match => [ "message", "%{TIMESTAMP_ISO8601:original_timestamp} %{NUMBER:pid} %{LOGLEVEL:level} (?<program>\w+([.]\w+)*) %{GREEDYDATA:syslog_message}" ]
+  }
 }
 
 output {
