@@ -7,9 +7,6 @@ input {
     path => [{{ file_list.name_redhat }}]
     type => "{{ file_list.type }}"
   }
-  file {
-    path => ["/tmp/fake_log"]
-  }
 }
 
 filter {
@@ -19,9 +16,6 @@ filter {
 }
 
 output {
-  file {
-    path => "{{ debug_output }}"
-  }
   redis {
     host => "{{ redis_host }}"
     data_type => "list"

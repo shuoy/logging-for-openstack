@@ -19,6 +19,6 @@
     dest={{ kibana_doc_root }}html/{{ kibana_version }}/{{ kibana_config_file }}
     regexp='(elasticsearch.* \"http.*)$'
     state=present
-    line='elasticsearch: "http://{{ elasticsearch_host }}:{{ elasticsearch_port }}", '
+    line='elasticsearch: "http://{{ kibana_es_host }}:{{ elasticsearch_port }}", '
   notify:
    - restart apache
