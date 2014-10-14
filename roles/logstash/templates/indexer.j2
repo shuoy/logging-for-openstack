@@ -1,6 +1,7 @@
 input {
   redis {
     host => "{{ redis_host }}"
+    add_field => { from_indexer => "{{ ansible_hostname }}" }
     type => "{{ file_list.type }}"
     data_type => "list"
     key => "{{ redis_key }}"
@@ -12,7 +13,7 @@ output {
     path => "{{ debug_output }}"
   }
   elasticsearch {
-    host => "{{ elasticsearch_host }}"
+    host => "{{ es_node }}"
     protocol => http
   }
 }

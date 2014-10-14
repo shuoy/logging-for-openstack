@@ -10,5 +10,5 @@ kibana_config_file: "config.js"
 
 # User / password to access the kibana interface (ToBeOverrided)
 kibana_user: "admin"
-kibana_pass: "CHANGE ME!"
+kibana_pass: "admin"
 kibana_admin_email: "root@localhost"

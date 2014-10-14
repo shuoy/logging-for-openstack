@@ -14,7 +14,11 @@
   sudo: True
   roles:
     - { role: searchengine }
-    - { role: kibana}
+
+- hosts: kibananodes
+  sudo: True
+  roles:
+    - { role: kibana }
 
 - hosts: shippernodes
   sudo: True

@@ -12,6 +12,6 @@
 #    - restart elasticsearch
 
 - name: Ensure elasticsearch config is in place
-  copy: src=elasticsearch.yml dest={{ elasticsearch_conf.destination }}
+  template: src=elasticsearch.j2 dest={{ elasticsearch_conf.destination }}
   notify:
     - restart elasticsearch
