@@ -1,10 +1,7 @@
 input {
   file {
-    path => [{{ file_list.name_debian }}]
-    type => "{{ file_list.type }}"
-  }
-  file {
-    path => [{{ file_list.name_redhat }}]
+    path => [{{ file_list.list }}]
+    exclude => ["*.gz", "wtmp"]
     type => "{{ file_list.type }}"
   }
 }

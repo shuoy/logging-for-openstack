@@ -11,6 +11,7 @@ elasticsearch_port: 9200
 file_list:
     name_debian: '"/var/log/syslog","/var/log/kern.log","/var/log/auth.log","/var/log/boot.log"'
     name_redhat: '"/var/log/boot.log","/var/log/chief-client.log","/var/log/audit/audit.log","/var/log/nova/compute.log","/var/log/neutron/openvswitch-agent.log", "/var/log/neutron/server.log"'
+    list: '"/var/log/*","/var/log/keystone/*", "/var/log/nova/*", "/var/log/cinder/*", "/var/log/neutron/*", "/var/log/glance/*", "/var/log/openvswitch/*"'
     type: syslog
 
 #list key in redis

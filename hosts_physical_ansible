@@ -1,6 +1,84 @@
 [shippernodes]
+shipper11 ansible_ssh_host=10.2.0.11 ansible_ssh_user=weida
+shipper12 ansible_ssh_host=10.2.0.12 ansible_ssh_user=weida
+shipper13 ansible_ssh_host=10.2.0.13 ansible_ssh_user=weida
+shipper14 ansible_ssh_host=10.2.0.14 ansible_ssh_user=weida
+shipper15 ansible_ssh_host=10.2.0.15 ansible_ssh_user=weida
+shipper16 ansible_ssh_host=10.2.0.16 ansible_ssh_user=weida
+shipper17 ansible_ssh_host=10.2.0.17 ansible_ssh_user=weida
+shipper18 ansible_ssh_host=10.2.0.18 ansible_ssh_user=weida
+shipper19 ansible_ssh_host=10.2.0.19 ansible_ssh_user=weida
+shipper20 ansible_ssh_host=10.2.0.20 ansible_ssh_user=weida
+shipper21 ansible_ssh_host=10.2.0.21 ansible_ssh_user=weida
+shipper22 ansible_ssh_host=10.2.0.22 ansible_ssh_user=weida
+shipper23 ansible_ssh_host=10.2.0.23 ansible_ssh_user=weida
+shipper24 ansible_ssh_host=10.2.0.24 ansible_ssh_user=weida
+shipper25 ansible_ssh_host=10.2.0.25 ansible_ssh_user=weida
+shipper26 ansible_ssh_host=10.2.0.26 ansible_ssh_user=weida
+shipper27 ansible_ssh_host=10.2.0.27 ansible_ssh_user=weida
+shipper28 ansible_ssh_host=10.2.0.28 ansible_ssh_user=weida
+shipper29 ansible_ssh_host=10.2.0.29 ansible_ssh_user=weida
+shipper30 ansible_ssh_host=10.2.0.30 ansible_ssh_user=weida
+shipper31 ansible_ssh_host=10.2.0.31 ansible_ssh_user=weida
+shipper32 ansible_ssh_host=10.2.0.32 ansible_ssh_user=weida
+shipper33 ansible_ssh_host=10.2.0.33 ansible_ssh_user=weida
+shipper34 ansible_ssh_host=10.2.0.34 ansible_ssh_user=weida
+shipper35 ansible_ssh_host=10.2.0.35 ansible_ssh_user=weida
+shipper36 ansible_ssh_host=10.2.0.36 ansible_ssh_user=weida
+shipper37 ansible_ssh_host=10.2.0.37 ansible_ssh_user=weida
+shipper38 ansible_ssh_host=10.2.0.38 ansible_ssh_user=weida
+shipper39 ansible_ssh_host=10.2.0.39 ansible_ssh_user=weida
+shipper40 ansible_ssh_host=10.2.0.40 ansible_ssh_user=weida
+shipper41 ansible_ssh_host=10.2.0.41 ansible_ssh_user=weida
+shipper42 ansible_ssh_host=10.2.0.42 ansible_ssh_user=weida
+shipper43 ansible_ssh_host=10.2.0.43 ansible_ssh_user=weida
+shipper44 ansible_ssh_host=10.2.0.44 ansible_ssh_user=weida
+shipper45 ansible_ssh_host=10.2.0.45 ansible_ssh_user=weida
+shipper46 ansible_ssh_host=10.2.0.46 ansible_ssh_user=weida
+shipper47 ansible_ssh_host=10.2.0.47 ansible_ssh_user=weida
+shipper48 ansible_ssh_host=10.2.0.48 ansible_ssh_user=weida
+shipper49 ansible_ssh_host=10.2.0.49 ansible_ssh_user=weida
+shipper50 ansible_ssh_host=10.2.0.50 ansible_ssh_user=weida
+shipper51 ansible_ssh_host=10.2.0.51 ansible_ssh_user=weida
+shipper52 ansible_ssh_host=10.2.0.52 ansible_ssh_user=weida
+shipper53 ansible_ssh_host=10.2.0.53 ansible_ssh_user=weida
+shipper54 ansible_ssh_host=10.2.0.54 ansible_ssh_user=weida
+shipper55 ansible_ssh_host=10.2.0.55 ansible_ssh_user=weida
+shipper56 ansible_ssh_host=10.2.0.56 ansible_ssh_user=weida
+shipper57 ansible_ssh_host=10.2.0.57 ansible_ssh_user=weida
+shipper58 ansible_ssh_host=10.2.0.58 ansible_ssh_user=weida
+shipper59 ansible_ssh_host=10.2.0.59 ansible_ssh_user=weida
+shipper60 ansible_ssh_host=10.2.0.60 ansible_ssh_user=weida
+shipper61 ansible_ssh_host=10.2.0.61 ansible_ssh_user=weida
+shipper62 ansible_ssh_host=10.2.0.62 ansible_ssh_user=weida
+shipper63 ansible_ssh_host=10.2.0.63 ansible_ssh_user=weida
+shipper64 ansible_ssh_host=10.2.0.64 ansible_ssh_user=weida
+shipper65 ansible_ssh_host=10.2.0.65 ansible_ssh_user=weida
+shipper66 ansible_ssh_host=10.2.0.66 ansible_ssh_user=weida
+shipper67 ansible_ssh_host=10.2.0.67 ansible_ssh_user=weida
+shipper68 ansible_ssh_host=10.2.0.68 ansible_ssh_user=weida
+shipper69 ansible_ssh_host=10.2.0.69 ansible_ssh_user=weida
+shipper70 ansible_ssh_host=10.2.0.70 ansible_ssh_user=weida
+shipper71 ansible_ssh_host=10.2.0.71 ansible_ssh_user=weida
+shipper72 ansible_ssh_host=10.2.0.72 ansible_ssh_user=weida
+shipper73 ansible_ssh_host=10.2.0.73 ansible_ssh_user=weida
+shipper74 ansible_ssh_host=10.2.0.74 ansible_ssh_user=weida
+shipper75 ansible_ssh_host=10.2.0.75 ansible_ssh_user=weida
+shipper76 ansible_ssh_host=10.2.0.76 ansible_ssh_user=weida
+shipper77 ansible_ssh_host=10.2.0.77 ansible_ssh_user=weida
+shipper78 ansible_ssh_host=10.2.0.78 ansible_ssh_user=weida
+shipper79 ansible_ssh_host=10.2.0.79 ansible_ssh_user=weida
+shipper80 ansible_ssh_host=10.2.0.80 ansible_ssh_user=weida
+shipper81 ansible_ssh_host=10.2.0.81 ansible_ssh_user=weida
+shipper82 ansible_ssh_host=10.2.0.82 ansible_ssh_user=weida
+shipper83 ansible_ssh_host=10.2.0.83 ansible_ssh_user=weida
+shipper84 ansible_ssh_host=10.2.0.84 ansible_ssh_user=weida
+shipper85 ansible_ssh_host=10.2.0.85 ansible_ssh_user=weida
+shipper86 ansible_ssh_host=10.2.0.86 ansible_ssh_user=weida
+shipper87 ansible_ssh_host=10.2.0.87 ansible_ssh_user=weida
+shipper88 ansible_ssh_host=10.2.0.88 ansible_ssh_user=weida
+shipper89 ansible_ssh_host=10.2.0.89 ansible_ssh_user=weida
 shipper90 ansible_ssh_host=10.2.0.90 ansible_ssh_user=weida
-shipper92 ansible_ssh_host=10.2.0.92 ansible_ssh_user=weida
 
 [brokernodes]
 broker ansible_ssh_host=10.2.0.62 ansible_ssh_user=weida
@@ -8,12 +86,12 @@ broker ansible_ssh_host=10.2.0.62 ansible_ssh_user=weida
 [logstashnodes]
 logstash1 ansible_ssh_host=172.20.44.23 ansible_ssh_user=ubuntu es_node=172.20.44.23
 logstash2 ansible_ssh_host=172.20.44.24 ansible_ssh_user=ubuntu es_node=172.20.44.24
-logstash3 ansible_ssh_host=172.20.44.25 ansible_ssh_user=ubuntu es_node=172.20.44.25
+#logstash3 ansible_ssh_host=172.20.44.25 ansible_ssh_user=ubuntu es_node=172.20.44.25
 logstash4 ansible_ssh_host=172.20.44.26 ansible_ssh_user=ubuntu es_node=172.20.44.26
 [searchnodes]
 elasticsearch1 ansible_ssh_host=172.20.44.23 ansible_ssh_user=ubuntu
 elasticsearch2 ansible_ssh_host=172.20.44.24 ansible_ssh_user=ubuntu
-elasticsearch3 ansible_ssh_host=172.20.44.25 ansible_ssh_user=ubuntu
+#elasticsearch3 ansible_ssh_host=172.20.44.25 ansible_ssh_user=ubuntu
 elasticsearch4 ansible_ssh_host=172.20.44.26 ansible_ssh_user=ubuntu
 
 [kibananodes]
