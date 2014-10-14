@@ -14,6 +14,12 @@
 - name: Unarchive source to vhost
   command: tar -C {{ kibana_doc_root }}/html -zxf /tmp/{{ kibana_version }}.tar.gz
 
+- name: Create apache vhost config from template
+  template: src=vhost-redhat.j2 dest=/etc/httpd/conf.d/kibana.conf owner=root group=root mode=0644
+
+- name: Remove welcome.conf
+  file: path=/etc/httpd/conf.d/welcome.conf state=absent
+
 - name: Replace the URI of the ElasticSearch service in config.js on Kibana server
   lineinfile: >
     dest={{ kibana_doc_root }}html/{{ kibana_version }}/{{ kibana_config_file }}

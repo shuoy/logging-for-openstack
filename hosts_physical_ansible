@@ -95,4 +95,5 @@ elasticsearch2 ansible_ssh_host=172.20.44.24 ansible_ssh_user=ubuntu
 elasticsearch4 ansible_ssh_host=172.20.44.26 ansible_ssh_user=ubuntu
 
 [kibananodes]
-kibana ansible_ssh_host=172.20.44.23 ansible_ssh_user=ubuntu
+kibana1 ansible_ssh_host=172.20.44.23 ansible_ssh_user=ubuntu
+kibana2 ansible_ssh_host=172.20.44.28 ansible_ssh_user=fedora
