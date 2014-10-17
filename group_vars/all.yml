@@ -1,9 +1,9 @@
 ---
 
 #host ip and port
-redis_host: 10.2.0.62
-kibana_es_host: 10.2.1.159
-elasticsearch_host: 172.20.44.23
+redis_host: 192.168.33.11
+kibana_es_host: 192.168.33.21
+elasticsearch_host: 192.168.33.21
 elasticsearch_port: 9200
 
 
