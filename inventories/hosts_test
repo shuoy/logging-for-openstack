@@ -1,0 +1,15 @@
+[shippernodes]
+shipper1 ansible_ssh_host=192.168.1.1 ansible_ssh_user=ubuntu redis_host=192.168.1.3
+shipper2 ansible_ssh_host=192.168.1.2 ansible_ssh_user=ubuntu redis_host=192.168.1.3
+
+[brokernodes]
+broker ansible_ssh_host=192.168.1.3 ansible_ssh_user=ubuntu
+
+[logstashnodes]
+logstash1 ansible_ssh_host=192.168.1.4 ansible_ssh_user=ubuntu es_node=192.168.1.4 redis_host=192.168.1.3
+
+[searchnodes]
+elasticsearch1 ansible_ssh_host=192.168.1.4 ansible_ssh_user=ubuntu
+
+[kibananodes]
+kibana1 ansible_ssh_host=192.168.1.4 ansible_ssh_user=ubuntu kibana_es_host=192.168.1.4
