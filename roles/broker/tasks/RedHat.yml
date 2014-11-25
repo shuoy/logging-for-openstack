@@ -17,13 +17,13 @@
   notify:
     - "Restart Redis"
 
-- name: "Ensure Redis server is running"
-  service: name={{ redis.redhat.service }} state=started
+- name: "Ensure Redis server is running and boots on startup"
+  service: name={{ redis.redhat.service }} state=started enabled=yes
 
-- name: Ensure redis boots on startup
-  command: chkconfig redis on
-  notify:
-    - "Restart Redis"
+#- name: Ensure redis boots on startup
+#  action: command /sbin/chkconfig redis on
+#  notify:
+#    - "Restart Redis"
 
 - name: Install Redmon dependencies
   yum: name={{ item }} state=installed

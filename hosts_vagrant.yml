@@ -3,6 +3,6 @@
 hosts:
   shipper1: 192.168.33.10
   broker: 192.168.33.11
-  logstash: 192.168.33.20
-  elasticsearch: 192.168.33.21
+  elasticsearch1: 192.168.33.21
+  elasticsearch2: 192.168.33.22
   # kibana: 192.168.33.22

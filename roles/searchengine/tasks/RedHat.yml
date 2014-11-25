@@ -12,8 +12,10 @@
     - java-1.7.0-openjdk
     - elasticsearch
 
-- name: Ensure elasticsearch boots on startup
-  command: chkconfig elasticsearch on
-  notify:
-    - restart elasticsearch
+#- name: Ensure elasticsearch boots on startup
+#  command: chkconfig elasticsearch on
+#  notify:
+#    - restart elasticsearch
 
+- name: Ensure elasticsearch is running and boots on startup
+  service: name=elasticsearch state=started enabled=yes

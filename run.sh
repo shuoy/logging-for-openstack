@@ -7,7 +7,6 @@ printf "\n$machine_type\t$os_family\n\n"
 
 rm -rf ./Vagrantfile
 #source rc
-export ANSIBLE_CONFIG=.ansible.cfg
 
 if [ x$machine_type = xVAGRANT ]; then
   if [ x$os_family = xDEBIAN ]; then
@@ -15,15 +14,17 @@ if [ x$machine_type = xVAGRANT ]; then
   elif [ x$os_family = xREDHAT ]; then
     ln -s ./Vagrantfile.redhat ./Vagrantfile
   else
-    echo "Usage: run.sh [vagrant|physical] [debian|redhat(physical machine doesn't need)]"
+    echo "Usage: run.sh [vagrant [debian | redhat] | physical <inventory>] "
     exit 2
   fi
   vagrant up
-  ansible-playbook -i hosts_vagrant_ansible site.yml
+  export ANSIBLE_CONFIG=.ansible.cfg.vagrant
+  ansible-playbook -i inventories/hosts_vagrant_ansible site.yml
 elif [ x$machine_type = xPHYSICAL ]; then
-  ansible-playbook -i hosts_physical_ansible site.yml
+  export ANSIBLE_CONFIG=.ansible.cfg.physical
+  ansible-playbook -i inventories/$2 site.yml
 else
-  echo "Usage: run.sh [vagrant|physical] [debian|redhat(physical machine doesn't need)]"
+  echo "Usage: run.sh [vagrant [debian | redhat] | physical <inventory>] "
   exit 1
 fi
 

@@ -17,10 +17,12 @@
   notify:
     - restart logstash
 
-- name: Ensure logstash boots on startup
-  command: chkconfig logstash on
-  notify:
-    - restart logstash
+#- name: Ensure logstash boots on startup
+#  command: chkconfig logstash on
+#  notify:
+#    - restart logstash
+- name: Ensure logstash is running and boots on startup
+  service: name=logstash state=started enabled=yes
 
 - name: Change log files permission
   shell: chmod 644 /var/log/messages /var/log/secure /var/log/boot.log

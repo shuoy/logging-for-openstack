@@ -1,19 +1,18 @@
 input {
   file {
-    path => [{{ file_list.name_debian }}]
+    path => [{{ file_list.list }}]
+    exclude => ["*.gz", "wtmp"]
     type => "{{ file_list.type }}"
   }
-  file {
-    path => [{{ file_list.name_redhat }}]
-    type => "{{ file_list.type }}"
-  }
+}
 
+filter {
+  grok {
+    match => [ "message", "%{TIMESTAMP_ISO8601:original_timestamp} %{NUMBER:pid} %{LOGLEVEL:level} (?<program>\w+([.]\w+)*) %{GREEDYDATA:syslog_message}" ]
+  }
 }
 
 output {
-  file {
-    path => "{{ debug_output }}"
-  }
   redis {
     host => "{{ redis_host }}"
     data_type => "list"

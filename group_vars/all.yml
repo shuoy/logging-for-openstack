@@ -1,15 +1,17 @@
 ---
 
 #host ip and port
-redis_host: 192.168.33.11
-elasticsearch_host: 192.168.33.21
+#redis_host: 192.168.33.11
+#kibana_es_host: 192.168.33.21
+#elasticsearch_host: 192.168.33.21
 elasticsearch_port: 9200
 
 
 # File list to be monitored
 file_list:
     name_debian: '"/var/log/syslog","/var/log/kern.log","/var/log/auth.log","/var/log/boot.log"'
-    name_redhat: '"/var/log/messages","/var/log/secure","/var/log/lastlog"'
+    name_redhat: '"/var/log/boot.log","/var/log/chief-client.log","/var/log/audit/audit.log","/var/log/nova/compute.log","/var/log/neutron/openvswitch-agent.log", "/var/log/neutron/server.log"'
+    list: '"/var/log/*","/var/log/keystone/*", "/var/log/nova/*", "/var/log/cinder/*", "/var/log/neutron/*", "/var/log/glance/*", "/var/log/openvswitch/*"'
     type: syslog
 
 #list key in redis

@@ -1,7 +1,7 @@
 ---
 
 # Installation related variable
-kibana_doc_root: "/var/www/"
+kibana_doc_root: "/var/www"
 kibana_url: "https://download.elasticsearch.org/kibana/kibana/"
 kibana_version: "kibana-3.1.0"
 kibana_config_file: "config.js"
@@ -10,5 +10,5 @@ kibana_config_file: "config.js"
 
 # User / password to access the kibana interface (ToBeOverrided)
 kibana_user: "admin"
-kibana_pass: "CHANGE ME!"
+kibana_pass: "admin"
 kibana_admin_email: "root@localhost"
